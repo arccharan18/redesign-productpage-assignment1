@@ -10,47 +10,41 @@ const ContactForm = () => {
         fullname: string;
         email: string;
         subject: string;
-        message: string
+        message: string;
     }>({
         fullname: '',
         email: '',
         subject: '',
         message: ''
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [focused, setFocused] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            setIsSubmitting(true)
+            setIsSubmitting(true);
             // await apiContactUs(formState)
-            setIsSubmitting(false)
+            setIsSubmitting(false);
             toast.push(
-                <Notification
-                    title={'Success'}
-                    type={'success'}
-                >
+                <Notification title={'Success'} type={'success'}>
                     Successfully submitted
-                </Notification>,
-            )
+                </Notification>
+            );
             setFormState({
                 fullname: '',
                 email: '',
                 subject: '',
                 message: ''
-            })
+            });
         } catch (err) {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
             toast.push(
-                <Notification
-                    title={err?.response?.data.message}
-                    type={'danger'}
-                >
+                <Notification title={err?.response?.data.message} type={'danger'}>
                     {err?.response?.data.message}
-                </Notification>,
-            )
+                </Notification>
+            );
         }
     };
 
@@ -68,7 +62,9 @@ const ContactForm = () => {
                     {/* Left Column - Contact Info */}
                     <div className="space-y-8">
                         <div>
-                            <h2 className="text-4xl font-bold text-gray-900 mb-4">Let's get in touch!</h2>
+                            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                                Let's get in touch!
+                            </h2>
                             <p className="text-gray-600 text-lg">
                                 Got questions about GoGetWell.AI? Our team is here to help. Contact us for quick and friendly support.
                             </p>
@@ -119,8 +115,7 @@ const ContactForm = () => {
                     <div className="bg-gray-50 rounded-2xl shadow-lg p-4 sm:p-8">
                         <form onSubmit={handleSubmit} className="space-y-3">
                             <div className="relative">
-                                <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${focused === 'fullName' || formState.fullname ? 'text-primary' : 'text-gray-400'
-                                    }`}>
+                                <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${focused === 'fullName' || formState.fullname ? 'text-primary' : 'text-gray-400'}`}>
                                     <BiUser className="w-5 h-5" />
                                 </div>
                                 <input
@@ -137,8 +132,7 @@ const ContactForm = () => {
                             </div>
 
                             <div className="relative">
-                                <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${focused === 'email' || formState.email ? 'text-primary' : 'text-gray-400'
-                                    }`}>
+                                <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${focused === 'email' || formState.email ? 'text-primary' : 'text-gray-400'}`}>
                                     <CgMail className="w-5 h-5" />
                                 </div>
                                 <input
@@ -153,24 +147,6 @@ const ContactForm = () => {
                                     required
                                 />
                             </div>
-
-                            {/* <div className="relative">
-                                <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${focused === 'subject' || formState.subject ? 'text-primary' : 'text-gray-400'
-                                    }`}>
-                                    <BiMessageSquare className="w-5 h-5" />
-                                </div>
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    placeholder="Subject"
-                                    value={formState.subject}
-                                    onChange={handleChange}
-                                    onFocus={() => setFocused('subject')}
-                                    onBlur={() => setFocused('')}
-                                    className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
-                                    required
-                                />
-                            </div> */}
 
                             <div className="relative">
                                 <textarea
